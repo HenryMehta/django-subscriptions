@@ -1,0 +1,30 @@
+{% extends "subscriptions/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+    <h2>Add Subscriptions</h2>
+{% endblock %}
+
+{% block content %}
+    {% if subscription_list %}
+    <table class="table table-condenced">
+        <thead>
+            <tr><th>{% trans "Subscription" %}</th><th>{% trans "Start Date" %}</th><th>{% trans "End Date" %}</th><th>{% trans "Action" %}</th></tr>
+        </thead>
+        <tbody>
+            {% for sub in subscription_list %}
+                <tr>
+                    <td>{{ sub.name }}</td>
+                    <td>{{ sub.start_date }}</td>
+                    <td>{{ sub.end_date }}</td>
+                    <td><a href="{% url 'subscriptions_add' sub.id %}" >{% trans "Add" %}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>{% trans "No messages." %}</p>
+    {% endif %}
+        
+{% endblock %}

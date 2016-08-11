@@ -1,0 +1,42 @@
+{% extends "subscriptions/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+    <h2>Confirm Subscription</h2>
+{% endblock %}
+
+{% block content %}
+    <h4>Confirm Payment</h4>
+    <table class="table table-condenced">
+        <tr><td>Subscription Name:</td><td>{{subscription.name}}</td></tr>
+        <tr><td>Cost:</td><td>&pound;{{subscription.cost}}</td></tr>
+        <tr><td>Start Date:</td><td>{{subscription.start_date}}</td></tr>
+        <tr><td>End Date:</td><td>{{subscription.end_date}}</td></tr>
+        <tr>
+            <td>Members Covered:</td>
+            <td>
+                {% for m in members %}
+                    {{m.first_name}} {{m.last_name}} (username: {{m.username}})<br/>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    Total to pay is : <strong>£{{subscription.cost}}</strong>
+    <form action="{% url 'subscriptions_pay' sid=subscription.id count=members|length %}" method="POST">
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-email="{{request.user.email}}"
+            data-key="{{stripe_key}}"
+            data-amount="{{amount_due}}"
+            data-name="Cowbridge Tennis Club"
+            data-currency="gbp"
+            data-description="{{ subscription.name }}"
+            data-locale="auto">
+        </script>
+        {% for m in members %}
+            <input type="text" value={{m.id}} hidden name="user{{forloop.counter}}">
+        {% endfor %}
+    </form>
+        
+{% endblock %}

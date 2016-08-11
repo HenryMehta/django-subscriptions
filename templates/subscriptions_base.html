@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <meta name="keywords" content="Django-Subscriptions Application">
+        <meta name="description" content="Django-Subscriptions Application">
+        <title>Subscriptions</title>
+		<meta name="author" content="Hexia Web Services Ltd">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {% load static from staticfiles %}
+        <!-- Stylesheets -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	</head>
+<body> 
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">{% block page_title %}{% endblock %}</div>
+			<div class="col-sm-12">{% block sidebar %}{% endblock %}</div>
+			<div class="col-sm-12">{% block content %}{% endblock %}</div>
+		</div>
+	</div>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+</html>
