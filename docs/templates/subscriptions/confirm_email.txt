@@ -1,0 +1,21 @@
+{% load i18n %}
+{% blocktrans %}
+Dear {% endblocktrans %}{{ user.first_name }} {{user.last_name}},
+{% blocktrans %}
+Thank you for your new Subscription!
+
+You have purchased:
+Subscription Name: {% endblocktrans %}{{subscription.name}}
+{% blocktrans %}Cost: {% endblocktrans %}{{subscription.cost}}
+{% blocktrans %}Start Date: {% endblocktrans %}{{subscription.start_date}}
+{% blocktrans %}End Date: {% endblocktrans %}{{subscription.end_date}}
+{% blocktrans %}Members: {% endblocktrans %}{% for s in subs %} {{s.user.first_name}} {{s.user.last_name}} (username:{{s.user.username}}){% if not forloop.last %},{% endif %}{% endfor %}
+
+{% blocktrans %}We've taken a payment of {% endblocktrans %}£{{total_fee}}.
+
+{% blocktrans %}Thank you for your subscription
+
+Best wishes,{% endblocktrans %}
+
+{{site_name}} {% blocktrans %}Management Team
+{% endblocktrans %}

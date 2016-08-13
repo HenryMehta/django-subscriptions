@@ -1,0 +1,40 @@
+{% extends "subscriptions/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+    <h2>Add Subscriptions</h2>
+{% endblock %}
+
+{% block content %}  
+<div class="container">
+    <h4>Subscription Details</h4>
+    <table class="table table-condenced">
+        <tr><td>Subscription Name:</td><td>{{subscription.name}}</td></tr>
+        <tr><td>Cost:</td><td>&pound;{{subscription.cost}}</td></tr>
+        <tr><td>Start Date:</td><td>{{subscription.start_date}}</td></tr>
+        <tr><td>End Date:</td><td>{{subscription.end_date}}</td></tr>
+    </table>
+    <h4>Member Details</h4>
+    <form action="{% url 'subscriptions_add' sid=subscription.id %}" method="post">{% csrf_token %}
+        <table class="table table-condenced">
+            <thead><th>Member Category</th><th>Select</th><th></th></thead>
+            {% for c, m in zip %}
+                <tr>
+                    <td>{{c.category.name}}</td>
+                    <td>
+                        <select name="select{{c.id}}">
+                            <option value="0">Select Member</option>
+                            {% for m1 in m %}
+                            <option value="{{m1.id}}" {% if forloop.first %} {% if m1.id == user.id %} selected {% endif %} {% endif %}>{{m1.first_name}} {{m1.last_name}} (username: {{m1.username}})</option>
+                        {% endfor %}
+                        </select>
+                    </td>   
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

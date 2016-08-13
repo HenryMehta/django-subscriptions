@@ -1,0 +1,29 @@
+{% extends "subscriptions/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+    <h2>My Subscriptions</h2>
+{% endblock %}
+
+{% block content %}
+    {% if mysubs_list %}
+    <table class="table table-condenced">
+        <thead>
+            <tr><th>{% trans "Subsciption" %}</th><th>{% trans "Start Date" %}</th><th>{% trans "End Date" %}</th></tr>
+        </thead>
+        <tbody>
+            {% for sub in mysubs_list %}
+                <tr>
+                    <td><a href="{% url 'subscriptions_detail' sid=sub.token %}">{{ sub.sub.name }}</a></td>
+                    <td>{{ sub.sub.start_date }}</td>
+                    <td>{{ sub.sub.end_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>{% trans "No subscriptions." %}</p>
+    {% endif %}
+        
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "subscriptions/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+    <h2>Subscription Detail</h2>
+{% endblock %}
+
+{% block content %}
+    <h4>Subscription Details</h4>
+    <table class="table table-condenced">
+        <tr><td>Subscription Name:</td><td>{{subscription.name}}</td></tr>
+        <tr><td>Cost:</td><td>&pound;{{subscription.cost}}</td></tr>
+        <tr><td>Start Date:</td><td>{{subscription.start_date}}</td></tr>
+        <tr><td>End Date:</td><td>{{subscription.end_date}}</td></tr>
+        <tr>
+            <td>Members Covered:</td>
+            <td>
+                {% for sub in subs %}
+                    {{sub.user.first_name}} {{sub.user.last_name}} (username: {{sub.user.username}}) <br/>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+{% endblock %}

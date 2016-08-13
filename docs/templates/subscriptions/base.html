@@ -1,0 +1,16 @@
+{% extends "subscriptions_base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block page_title %}
+{% endblock %}
+    
+{% block sidebar %}
+<ul class="nav nav-tabs"">
+    <li><a href="{% url 'subscriptions_home' %} ">{% trans "My Subscriptions" %}</a></li>
+    <li><a href="{% url 'subscriptions_list' %} ">{% trans "Add Subsciption" %}</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
